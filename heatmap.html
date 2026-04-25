@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trick Tower Heatmap</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body style="background:#111; color:white; font-family:sans-serif;">
+
+<h2>🔥 Trick Tower Threat Heatmap</h2>
+<div id="heatmap"></div>
+
+<script>
+fetch("heatmap.json")
+.then(res => res.json())
+.then(data => {
+
+    const trace = {
+        z: data.heatmap,
+        x: data.turns,
+        y: data.floors,
+        type: 'heatmap',
+        colorscale: 'Hot'
+    };
+
+    const layout = {
+        title: "Threat Density Over Time",
+        xaxis: { title: "Turn" },
+        yaxis: { title: "Floor" }
+    };
+
+    Plotly.newPlot('heatmap', [trace], layout);
+});
+</script>
+
+</body>
+</html>
